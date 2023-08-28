@@ -45,6 +45,26 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
+Установить PostreSQL
+```bash
+sudo apt-get install postgresql
+```
+Выполнить вход
+```bash
+sudo -u postgres psql
+```
+Cоздать базу данных 
+с помощью следующей команды:
+```bash
+CREATE DATABASE edu_modules;
+```
+Выйти
+```bash
+\q
+```
+Создать файл `.env` 
+Записать в файл настройки, как в .env.sample
+
 Применить миграции
 ```bash
 python manage.py migrate
