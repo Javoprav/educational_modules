@@ -3,7 +3,7 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class Module(models.Model):
-    number = models.ImageField(verbose_name='порядковый номер')
+    id = models.AutoField(primary_key=True, verbose_name='порядковый номер')
     name = models.CharField(max_length=150, verbose_name='название')
     preview = models.ImageField(upload_to='course/', verbose_name='картинка', **NULLABLE)
     description = models.TextField(verbose_name='описание', **NULLABLE)
