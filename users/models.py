@@ -6,11 +6,13 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class UserRoles(models.TextChoices):
+    """Роли пользователей"""
     MEMBER = 'member', _('member')
     MODERATOR = 'moderator', _('moderator')
 
 
 class User(AbstractUser):
+    """Модель описывающая Пользователя"""
     username = None
     email = models.EmailField(unique=True, verbose_name='почта')
     phone = models.CharField(max_length=35, verbose_name='телефон', **NULLABLE)

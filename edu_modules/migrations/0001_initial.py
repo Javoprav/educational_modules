@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='порядковый номер')),
                 ('name', models.CharField(max_length=150, verbose_name='название')),
-                ('preview', models.ImageField(blank=True, null=True, upload_to='course/', verbose_name='картинка')),
+                ('preview', models.ImageField(blank=True, null=True, upload_to='module/', verbose_name='картинка')),
                 ('description', models.TextField(blank=True, null=True, verbose_name='описание')),
                 ('updated_at', models.DateTimeField(auto_now=True, null=True, verbose_name='обновлен')),
             ],
