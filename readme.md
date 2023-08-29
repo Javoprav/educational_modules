@@ -77,6 +77,10 @@ python manage.py loaddata data.json
 ```bash
 python3 manage.py create_user
 ```
+Создать суперпользователя
+```bash
+python3 manage.py csu
+```
 Запустить сервер
 ```bash
 python manage.py runserver
