@@ -8,6 +8,7 @@ class SuperUserTestCase(APITestCase):
     def setUp(self) -> None:
         """Подготовка данных перед тестом"""
         self.superuser = User.objects.create(
+                        id='3',
                         email='superuser@user.com',
                         is_staff=False,
                         is_superuser=True,
@@ -22,7 +23,7 @@ class SuperUserTestCase(APITestCase):
 
     def test_super_user_get(self):
         """Тест суперюзера"""
-        response = self.client.get('/users/1/')
+        response = self.client.get('/users/3/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()['email'], 'superuser@user.com')
 
@@ -32,6 +33,7 @@ class UserTestCase(APITestCase):
     def setUp(self) -> None:
         """Подготовка данных перед тестом"""
         self.test_user = User.objects.create(
+                        id='4',
                         email='user@user.com',
                         is_staff=False,
                         is_superuser=False,
@@ -46,6 +48,6 @@ class UserTestCase(APITestCase):
 
     def test_users_get(self):
         """Тест пользователя"""
-        response = self.client.get('/users/2/')
+        response = self.client.get('/users/4/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()['email'], 'user@user.com')

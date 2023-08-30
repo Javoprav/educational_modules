@@ -99,3 +99,12 @@ python manage.py test edu_modules.tests
 ```bash
 python manage.py test users.tests
 ```
+Запустить тесты с покрытием
+```bash
+coverage run --source='.' manage.py test
+```
+Создать html файл для просмотра покрытия 
+```bash
+coverage html
+```
+Из созданной директории htmlcov запустить index.html для просмотра процента покрытия
