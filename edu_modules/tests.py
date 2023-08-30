@@ -23,5 +23,13 @@ class ModuleTestCase(APITestCase):
 
     def test_module_create(self):
         """Тест создания модели Module"""
-        response = self.client.post('/api/edu_modules/create/', {'name': self.test_model_name})
+        response = self.client.post('/api/edu_modules/', {'name': self.test_model_name})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_get_habit(self):
+        """Тест деталей модели Module"""
+        self.test_module_create()
+        response = self.client.get(f'/api/edu_modules/1/')
+        print(response.json()['id'])
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['id'], 1)

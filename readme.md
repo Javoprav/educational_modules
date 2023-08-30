@@ -58,6 +58,9 @@ Cоздать базу данных
 ```bash
 CREATE DATABASE edu_modules;
 ```
+```bash
+ALTER USER admin CREATEDB;
+```
 Выйти
 ```bash
 \q
