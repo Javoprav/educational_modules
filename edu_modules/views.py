@@ -20,18 +20,3 @@ class ModulesViewSet(viewsets.ModelViewSet):
     #         return Module.objects.all()
     #     else:
     #         return Module.objects.filter(owner=user)
-
-
-class ModulesListView(generics.ListAPIView):
-    """Выводит список модулей Module"""
-    serializer_class = ModulesSerializers
-    queryset = Module.objects.all()
-    # pagination_class = ModulesPagination
-
-    # def get_queryset(self):
-    #     """Выводит список модулей для разных пользователей"""
-    #     user = self.request.user
-    #     if user.is_staff or user.is_superuser or user.role == UserRoles.MODERATOR:
-    #         return Module.objects.all()
-    #     else:
-    #         return Module.objects.filter(public=True)

@@ -90,5 +90,12 @@ python manage.py runserver
 ```
 Собрать и запустить образ docker-compose
 ```bash
- docker-compose up -d --build
+docker-compose up -d --build
+```
+Запустить тесты
+```bash
+python manage.py test edu_modules.tests
+```
+```bash
+python manage.py test users.tests
 ```

@@ -1,5 +1,6 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
+from edu_modules.models import Module
 from users.models import User, UserRoles
 
 
@@ -26,10 +27,16 @@ class ModuleTestCase(APITestCase):
         response = self.client.post('/api/edu_modules/', {'name': self.test_model_name})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_get_habit(self):
+    def test_get_module(self):
         """Тест деталей модели Module"""
         self.test_module_create()
         response = self.client.get(f'/api/edu_modules/1/')
-        print(response.json()['id'])
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()['id'], 1)
+
+    def test_list_module(self):
+        """Тест списка модели Module"""
+        self.test_module_create()
+        response = self.client.get('/api/edu_modules/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Module.objects.all().count(), 1)
