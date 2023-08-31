@@ -40,3 +40,4 @@ class ModuleTestCase(APITestCase):
         response = self.client.get('/api/edu_modules/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Module.objects.all().count(), 1)
+

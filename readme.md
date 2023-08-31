@@ -94,10 +94,7 @@ docker-compose up -d --build
 ```
 Запустить тесты
 ```bash
-python manage.py test edu_modules.tests
-```
-```bash
-python manage.py test users.tests
+python3 manage.py test --verbosity 2
 ```
 Запустить тесты с покрытием
 ```bash
@@ -108,3 +105,4 @@ coverage run --source='.' manage.py test
 coverage html
 ```
 Из созданной директории htmlcov запустить index.html для просмотра процента покрытия
+Документация будет доступна по ссылке http://127.0.0.1:8000/swagger/

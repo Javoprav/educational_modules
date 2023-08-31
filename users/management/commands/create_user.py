@@ -24,3 +24,4 @@ class Command(BaseCommand):
         )
         moder.set_password('123')
         moder.save()
+        print('Пользователи созданы')
