@@ -24,4 +24,15 @@ class Command(BaseCommand):
         )
         moder.set_password('123')
         moder.save()
+
+        """Команда для создания суперюзера"""
+        user = User.objects.create(
+            email='admin5@gmail.com',
+            is_staff=True,
+            is_superuser=True,
+            is_active=True
+        )
+        user.set_password('123')
+        user.save()
+
         print('Пользователи созданы')
