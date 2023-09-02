@@ -1,5 +1,3 @@
-import os
-from django.core.management import call_command
 from rest_framework.test import APITestCase
 from rest_framework import status
 from users.models import User, UserRoles
@@ -18,6 +16,14 @@ class SuperUserTestCase(APITestCase):
             is_active=True,
             role=UserRoles.MEMBER
         )
+        self.test_user = User.objects.create(
+            id=5,
+            email='user5@user.com',
+            is_staff=False,
+            is_superuser=False,
+            is_active=True,
+            role=UserRoles.MEMBER
+        )
         self.superuser.set_password('123')
         self.superuser.save()
         response = self.client.post('/api/token/', {"email": "superuser@user.com", "password": "123"})
@@ -29,6 +35,12 @@ class SuperUserTestCase(APITestCase):
         response = self.client.get('/users/3/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()['email'], 'superuser@user.com')
+
+    def test_update_super_user(self):
+        """Тест изменения пользователя суперюзером"""
+        response = self.client.patch('/user/5/update/', {"city": 'Moscow'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['city'], 'Moscow')
 
 
 class UserTestCase(APITestCase):

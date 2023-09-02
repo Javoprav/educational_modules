@@ -4,7 +4,7 @@ NULLABLE = {'null': True, 'blank': True}
 
 class Module(models.Model):
     """Модель описывающая Образовательные модули"""
-    id = models.AutoField(primary_key=True, verbose_name='порядковый номер')
+    number = models.IntegerField(unique=True, verbose_name='порядковый номер')
     name = models.CharField(max_length=150, verbose_name='название')
     preview = models.ImageField(upload_to='module/', verbose_name='картинка', **NULLABLE)
     description = models.TextField(verbose_name='описание', **NULLABLE)

@@ -24,13 +24,13 @@ class ModuleTestCase(APITestCase):
 
     def test_module_create(self):
         """Тест создания модели Module"""
-        response = self.client.post('/api/edu_modules/', {'name': self.test_model_name})
+        response = self.client.post('/api/edu_modules/', {'number': 1, 'name': self.test_model_name})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_get_module(self):
         """Тест деталей модели Module"""
         self.test_module_create()
-        response = self.client.get(f'/api/edu_modules/1/')
+        response = self.client.get('/api/edu_modules/1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()['id'], 1)
 
@@ -41,3 +41,14 @@ class ModuleTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Module.objects.all().count(), 1)
 
+    def test_module_update_view(self):
+        self.test_module_create()
+        response_update = self.client.patch('/api/edu_modules/5/', {"name": "Урок 5"})
+        self.assertEqual(response_update.status_code, status.HTTP_200_OK)
+        self.assertEqual(response_update.json()['name'], 'Урок 5')
+
+    def test_module_deletion_view(self):
+        self.test_module_create()
+        response = self.client.delete('/api/edu_modules/4/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Module.objects.filter(id=1).exists())

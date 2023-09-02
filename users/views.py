@@ -1,6 +1,6 @@
 from rest_framework import generics
-from users.models import UserRoles
-from users.serializers.serializers import *
+from users.models import UserRoles, User
+from users.serializers.serializers import ForCreateUserSerializers, ForAuthUserSerializers
 
 
 class UsersListView(generics.ListAPIView):
