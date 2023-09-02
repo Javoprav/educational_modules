@@ -4,12 +4,15 @@ services:
   db:
     restart: always
     container_name: db
+    ports:
+      - '5432:5432'
     env_file:
       - ./.env
     image: postgres:14.9-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./.env.docker
+      - pg_data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     healthcheck:
       test: [ 'CMD-SHELL', 'pg_isready' ]
       interval: 10s
@@ -39,4 +42,4 @@ services:
       && python manage.py runserver 0.0.0.0:8000"
 
 volumes:
-  postgres_data:
+  pg_data:
