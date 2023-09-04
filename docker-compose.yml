@@ -2,23 +2,21 @@ version: '3.9'
 
 services:
   db:
-    restart: always
+    image: postgres:14-alpine
     container_name: db
+    environment:
+      PGDATA: /var/lib/postgresql/pgdata
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/pgdata
     ports:
       - '5432:5432'
-    env_file:
-      - ./.env
-    image: postgres:14.9-alpine
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-      - ./postgresql.conf:/etc/postgresql/postgresql.conf
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     healthcheck:
-      test: [ 'CMD-SHELL', 'pg_isready' ]
-      interval: 10s
+      test: [ 'CMD-SHELL', 'pg_isready -U postgres' ]
+      interval: 5s
       timeout: 5s
       retries: 5
-
   api:
     restart: always
     build:
@@ -33,7 +31,6 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-      - ./.env.docker/:/app/.env
     command: >
       bash -c "python  manage.py collectstatic --noinput
       && python manage.py makemigrations
@@ -42,4 +39,4 @@ services:
       && python manage.py runserver 0.0.0.0:8000"
 
 volumes:
-  pg_data:
+  postgres_data:
