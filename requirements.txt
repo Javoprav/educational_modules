@@ -19,3 +19,4 @@ sqlparse
 tzdata
 coverage
 Docker
+gunicorn

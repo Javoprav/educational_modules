@@ -28,26 +28,30 @@ services:
         condition: service_healthy
     env_file:
       - ./.env
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     volumes:
       - .:/app
+      - .static_volume:/app/static
+      - .media_volume/app/media
     command: >
       bash -c "python  manage.py collectstatic --noinput
       && python manage.py makemigrations
       && python manage.py migrate
       && python manage.py loaddata data.json
-      && python manage.py runserver 0.0.0.0:8000"
+      && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
 
   nginx:
     build: ./nginx
     volumes:
-      - .staticfiles:/app/static
-      - .media:/app/media
+      - .static_volume:/app/static
+      - .media_volume:/app/media
     ports:
-      - 1337:80
+      - 80:80
     depends_on:
       - api
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:

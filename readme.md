@@ -67,6 +67,9 @@ Cоздать базу данных
 CREATE DATABASE edu_modules;
 ```
 ```bash
+CREATE USER admin WITH PASSWORD '123';
+```
+```bash
 ALTER USER admin CREATEDB;
 ```
 Выйти
