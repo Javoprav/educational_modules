@@ -9,6 +9,7 @@ class Module(models.Model):
     preview = models.ImageField(upload_to='module/', verbose_name='картинка', **NULLABLE)
     description = models.TextField(max_length=15000, verbose_name='описание', **NULLABLE)
     updated_at = models.DateTimeField(auto_now=True, verbose_name='обновлен', **NULLABLE)
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='создатель', **NULLABLE)
 
     class Meta:
         verbose_name = 'Образовательный модуль'
