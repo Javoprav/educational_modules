@@ -1,7 +1,6 @@
 from rest_framework import viewsets
 from edu_modules.models import Module
 from edu_modules.serializers.serializers import ModulesSerializers
-from users.models import UserRoles
 from .pagination import ModulesPagination
 from .permissions import IsModerator
 

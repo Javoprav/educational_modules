@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from edu_modules.models import Module
+from edu_modules.validators import excludeValidator
 
 
 class ModulesSerializers(serializers.ModelSerializer):
@@ -7,3 +8,4 @@ class ModulesSerializers(serializers.ModelSerializer):
     class Meta:
         model = Module
         fields = "__all__"
+        validators = [excludeValidator]
