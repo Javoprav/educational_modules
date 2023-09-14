@@ -3,6 +3,7 @@ from edu_modules.models import Module
 from edu_modules.serializers.serializers import ModulesSerializers
 from users.models import UserRoles
 from .pagination import ModulesPagination
+from .permissions import IsModerator
 
 
 class ModulesViewSet(viewsets.ModelViewSet):
@@ -10,6 +11,7 @@ class ModulesViewSet(viewsets.ModelViewSet):
     serializer_class = ModulesSerializers
     queryset = Module.objects.all()
     pagination_class = ModulesPagination
+    permission_classes = [IsModerator]
 
     def perform_create(self, serializer) -> None:
         """Сохраняет новому объекту владельца"""
