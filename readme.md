@@ -115,3 +115,10 @@ coverage run --source='.' manage.py test
 ```bash
 coverage html
 ```
+```bash
+ssh admin@158.160.105.158
+
+cd opt/educational_modules/
+
+sudo docker-compose -f docker-compose.prod.yml exec api python3 manage.py test --verbosity 2
+```
